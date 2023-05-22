@@ -1,11 +1,15 @@
-.header {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .header {
     display: flex;
     justify-content: space-between;
     border: 1px solid black;
 }
 
 .logo {
-    width: 200px;
+    width: 100px;
 }
 
 .nav-items > ul {
@@ -38,7 +42,7 @@
     width: 100%;
 }
 
-.res-container {
+.resturant-list {
     display: flex;
     flex-wrap: wrap;
 }
@@ -52,3 +56,15 @@
     text-align: center;
 }
 
+.shimmer-card {
+    width: 200px;
+    height: 200px;
+    background: lightgray;
+    margin: 20px;
+    
+}
+
+.menu {
+    display: flex;
+}
+ */

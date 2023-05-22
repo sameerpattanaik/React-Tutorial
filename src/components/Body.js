@@ -2,10 +2,11 @@ import ResturantCard from "./ResturantCard";
 import resList from "../utils/mockdata";
 import { useState,useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 
 const Body = () => {
-    //Local State variable - Super powerful variable
     const [allResturants, setAllResturants] = useState([]);
     const [filteredResturants, setFilteredResturant] = useState([]);
 
@@ -17,25 +18,30 @@ const Body = () => {
 async function getResturants() {
   const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING");
   const json = await data.json();
-  console.log(json);
   //optional chaining
   setAllResturants(json?.data?.cards[2]?.data?.data?.cards);
   setFilteredResturant(json?.data?.cards[2]?.data?.data?.cards);
 }
 
-//Conditional Rendering
-// if resturant is empty => shimmer UI
-// if resturant is not empty => actual UI
+const isOnline = useOnline();
 
-//not render component (Early return)
-if(!allResturants) return null;
-if(filteredResturants ?. length === 0) return <h1> No Resturant match your Filter!</h1>
+if(!isOnline){
+  return <h1>🛑 Offline, Please check your internet connections!!</h1>
+}
+
+// if(!allResturants) return null;
+// if(filteredResturants ?. length === 0) return <h1> No Resturant match your Filter!</h1>
+  const searchBtnCSS = {
+    backgroundColor: "red"
+  }
 
   return (allResturants.length == 0) ? <Shimmer /> : (
     <div className="body">
       <div className="filter">
         <button
-          className="filter-btn"
+          style={{
+            backgroundColor: "red"
+          }}
           onClick={() => {
             //filter logic;
             const filteredList = allResturants.filter(res => res?.data?.avgRating > 4);
@@ -43,12 +49,16 @@ if(filteredResturants ?. length === 0) return <h1> No Resturant match your Filte
           }}
 
         >
-          Top Rated Resturants
+        Top Rated Resturants
         </button>
       </div>
-      <div className="res-container">
+      <div className="resturant-list">
         {allResturants.map((resturant) => (
-          <ResturantCard key={resturant?.data?.id} resData={resturant} />
+          <Link to={"/resturant/"+ resturant?.data?.id}
+          key={resturant?.data?.id}
+          >
+            <ResturantCard resData={resturant} />
+          </Link>
         ))}
       </div>
     </div>

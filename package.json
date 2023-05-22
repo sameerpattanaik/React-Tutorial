@@ -22,11 +22,14 @@
   "homepage": "https://github.com/sameerpattanaik/React-Tutorial#readme",
   "devDependencies": {
     "parcel": "^2.8.3",
-    "process": "^0.11.10"
+    "postcss": "^8.4.23",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.3.2"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.1"
   },
   "browsersList": [
     "last 2 version"
