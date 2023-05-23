@@ -12,16 +12,16 @@ const ResturantCard = (props) => {
             cuisines,
             deliveryTime,
             costForTwo,
-            avgRating
+            avgRating,
         } = resData?.data;
-
     return(
-        <div className="res-card" style={styleCard}>
+        // <div className="res-card" style={styleCard}>
+         <div className="w-56 p-2 m-2 shadow-lg bg-pink-50">
             <img className="res-logo"
                 alt="res-logo"
                 src={CDN_URL + cloudinaryImageId}
             />
-            <h3>{name}</h3>
+            <h3 className="font-bold text-md">{name}</h3>
             <h4>{cuisines.join(", ")}</h4>
             <h4>Delivery Time:{deliveryTime} minutes</h4>
             <h4>Cost for two:{costForTwo/100}</h4>

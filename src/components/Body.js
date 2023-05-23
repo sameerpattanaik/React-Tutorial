@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 
 
-const Body = () => {
+const Body = ({user}) => {
     const [allResturants, setAllResturants] = useState([]);
     const [filteredResturants, setFilteredResturant] = useState([]);
 
@@ -38,10 +38,8 @@ if(!isOnline){
   return (allResturants.length == 0) ? <Shimmer /> : (
     <div className="body">
       <div className="filter">
-        <button
-          style={{
-            backgroundColor: "red"
-          }}
+        <button className="search-btn p-2 bg-purple-900 m-2 hover:bg-gray-500 text-white rounded-lg shadow-md"
+          
           onClick={() => {
             //filter logic;
             const filteredList = allResturants.filter(res => res?.data?.avgRating > 4);
@@ -52,12 +50,12 @@ if(!isOnline){
         Top Rated Resturants
         </button>
       </div>
-      <div className="resturant-list">
+      <div className="flex flex-wrap ">
         {allResturants.map((resturant) => (
           <Link to={"/resturant/"+ resturant?.data?.id}
           key={resturant?.data?.id}
           >
-            <ResturantCard resData={resturant} />
+            <ResturantCard resData={resturant}/>
           </Link>
         ))}
       </div>
